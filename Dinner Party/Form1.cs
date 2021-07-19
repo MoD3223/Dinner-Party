@@ -12,6 +12,8 @@ namespace Dinner_Party
 {
     public partial class Form1 : Form
     {
+        Birthday_Party birthday_Party;
+
         public int Guests;
         public bool Fantasy;
         public bool Healthy;
@@ -25,6 +27,7 @@ namespace Dinner_Party
         public Form1()
         {
             InitializeComponent();
+            birthday_Party = new Birthday_Party((int)numberBirthday.Value, fancyBirthday.Checked, cakeWriting.Text);
             labelFinalAmount.Text = FinalPrice + "zł";
         }
 
@@ -80,6 +83,34 @@ namespace Dinner_Party
                 FinalPrice = FinalPrice * 0.95;
             }
             labelFinalAmount.Text = FinalPrice + "zł";
+        }
+
+        //Birthday Party
+
+        public void DisplayBirthdayPartyCost()
+        {
+            tooLongLabel.Visible = birthday_Party.CakeWritingTooLong;
+            //TODO: Add an extra 100zl fee if there is over 12 people
+            decimal cost = birthday_Party.Cost;
+            LabelBirthdayCost.Text = cost.ToString("c");
+        }
+
+        private void numberBirthday_ValueChanged(object sender, EventArgs e)
+        {
+            birthday_Party.NumberOfPeople = (int)numberBirthday.Value;
+            DisplayBirthdayPartyCost();
+        }
+
+        private void fancyBirthday_CheckedChanged(object sender, EventArgs e)
+        {
+            birthday_Party.FancyDecorations = fancyBirthday.Checked;
+            DisplayBirthdayPartyCost();
+        }
+
+        private void cakeWriting_TextChanged(object sender, EventArgs e)
+        {
+            birthday_Party.CakeWriting = cakeWriting.Text;
+            DisplayBirthdayPartyCost();
         }
     }
 }
