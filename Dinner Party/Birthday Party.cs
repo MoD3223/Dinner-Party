@@ -97,6 +97,10 @@ namespace Dinner_Party
                 decimal totalCost = CalculateCostOfDecorations();
                 totalCost += CostOfFoodPerPerson * NumberOfPeople;
                 decimal cakeCost;
+                if (NumberOfPeople > 12)
+                {
+                    totalCost += 100;
+                }
                 if (CakeSize() == 8)
                 {
                     cakeCost = 40M + ActualLength * .25M;
@@ -108,10 +112,5 @@ namespace Dinner_Party
                 return totalCost + cakeCost;
             }
         }
-
-
-
-
-
     }
 }

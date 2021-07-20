@@ -35,6 +35,10 @@ namespace Dinner_Party
         {
             Guests = (int)guestNumeric.Value;
             GuestPrice = Guests * 25;
+            if (Guests > 12)
+            {
+                GuestPrice += 100;
+            }
             DisplayPartyCost();
         }
 
@@ -90,7 +94,6 @@ namespace Dinner_Party
         public void DisplayBirthdayPartyCost()
         {
             tooLongLabel.Visible = birthday_Party.CakeWritingTooLong;
-            //TODO: Add an extra 100zl fee if there is over 12 people
             decimal cost = birthday_Party.Cost;
             LabelBirthdayCost.Text = cost.ToString("c");
         }
